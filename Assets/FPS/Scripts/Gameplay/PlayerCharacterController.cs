@@ -1,14 +1,23 @@
 ﻿using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
+using Unity.FPS.Gameplay;
+
 
 namespace Unity.FPS.Gameplay
 {
     [RequireComponent(typeof(CharacterController), typeof(PlayerInputHandler), typeof(AudioSource))]
     public class PlayerCharacterController : MonoBehaviour
     {
+        //private Rigidbody rb;
+        //private CharacterController cc;
+        //private Grappling gp;
+        public bool activeGrapple;
+        public bool freeze;
+
         [Header("References")] [Tooltip("Reference to the main camera used for the player")]
         public Camera PlayerCamera;
+        public bool wallrunning;
 
         [Tooltip("Audio source for footsteps, jump, etc...")]
         public AudioSource AudioSource;
@@ -172,6 +181,23 @@ namespace Unity.FPS.Gameplay
 
         void Update()
         {
+
+            //grappling
+            //if (freeze)
+            //{
+            //    rb.velocity = Vector3.zero;
+
+            //}
+
+            //wallrunning
+            bool isSprinting = m_InputHandler.GetSprintInputHeld();
+
+            if (wallrunning)
+            {
+                 wallrunning = isSprinting;
+            }
+
+
             // check for Y kill
             if (!IsDead && transform.position.y < KillHeight)
             {
@@ -293,6 +319,8 @@ namespace Unity.FPS.Gameplay
                 {
                     isSprinting = SetCrouchingState(false, false);
                 }
+                //if (activeGrapple) return;
+                
 
                 float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
 
@@ -434,6 +462,56 @@ namespace Unity.FPS.Gameplay
             }
         }
 
+        public void JumpToPosition(Vector3 targetPosition, float trajectoryHeight)
+        {
+            activeGrapple = true;
+
+            velocityToSet = CalculateJumpVelocity(transform.position, targetPosition, trajectoryHeight);
+            Invoke(nameof(SetVelocity), 0.1f);
+
+            //Invoke(nameof(ResetRestrictions), 3f);
+        }
+
+        private Vector3 velocityToSet;
+        private bool enableMovementOnNextTouch;
+
+        private void SetVelocity()
+        {
+            enableMovementOnNextTouch = true;
+            //rb.velocity = velocityToSet;
+
+            //cam.DoFov(grappleFov);
+        }
+        public void ResetRestrictions()
+        {
+            activeGrapple = false;
+           // cam.DoFov(85f);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (enableMovementOnNextTouch)
+            {
+                enableMovementOnNextTouch = false;
+                ResetRestrictions();
+
+                //GetComponent<Grappling>().StopGrapple();
+            }
+        }
+
+        public Vector3 CalculateJumpVelocity(Vector3 startPoint, Vector3 endPoint, float trajectoryHeight)
+        {
+            float gravity = Physics.gravity.y;
+            float displacementY = endPoint.y - startPoint.y;
+            Vector3 displacementXZ = new Vector3(endPoint.x - startPoint.x, 0f, endPoint.z - startPoint.z);
+
+            Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * trajectoryHeight);
+            Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * trajectoryHeight / gravity)
+                + Mathf.Sqrt(2 * (displacementY - trajectoryHeight) / gravity));
+
+            return velocityXZ + velocityY;
+        }
+
         // returns false if there was an obstruction
         bool SetCrouchingState(bool crouched, bool ignoreObstructions)
         {
@@ -473,5 +551,25 @@ namespace Unity.FPS.Gameplay
             IsCrouching = crouched;
             return true;
         }
+
+        //private class Grappling
+        //{
+        //    public LineRenderer lr;
+        //    public float grapplingCd;
+        //    private float grapplingCdTimer;
+        //    private PlayerCharacterController pm;
+        //    private bool grappling;
+
+        //    public void StopGrapple()
+        //    {
+        //        pm.freeze = false;
+
+        //        grappling = false;
+
+        //        grapplingCdTimer = grapplingCd;
+
+        //        lr.enabled = false;
+        //    }
+        //}
     }
 }
