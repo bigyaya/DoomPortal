@@ -8,8 +8,12 @@ public class Respawn : MonoBehaviour
     [SerializeField] public Transform respawnPoint;
 
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        Player.transform.position = respawnPoint.transform.position;
+        if (other.CompareTag("Player"))
+        {
+            Player.transform.position = respawnPoint.transform.position;
+            Physics.SyncTransforms();
+        }
     }
 }

@@ -195,9 +195,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 8924682559891268397, guid: 3c6b27d949cdda749892906e1f1d1b27,
     type: 3}
   DelayBetweenShots: 0.1
-  BulletSpreadAngle: 0
+  BulletSpreadAngle: 2
   BulletsPerShot: 1
-  RecoilForce: 1
+  RecoilForce: 1.31
   AimZoomRatio: 0.5
   AimOffset: {x: 0, y: 0.075, z: 0}
   AutomaticReload: 1
@@ -207,11 +207,11 @@ MonoBehaviour:
   EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
-  AmmoReloadRate: 16
-  AmmoReloadDelay: 1
-  MaxAmmo: 24
+  AmmoReloadRate: 12
+  AmmoReloadDelay: 0.3
+  MaxAmmo: 30
   AutomaticReleaseOnCharged: 0
-  MaxChargeDuration: 2
+  MaxChargeDuration: 0.5
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 2
   WeaponAnimator: {fileID: 0}
