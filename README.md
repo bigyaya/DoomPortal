@@ -12,6 +12,6 @@ ou
 
 Jouez sur le Web: https://simmer.io/@yannick001/spacedoom
 
--Vous pouvez laisser vos feedback et impressions sur mon thread dans le Discord de la formation https://discord.com/channels/1044204288815145010/1088780885568004107
+-Vous pouvez laisser vos feedback et impressions sur github https://github.com/bigyaya/DoomPortal/issues
 
  
