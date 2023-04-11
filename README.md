@@ -6,7 +6,7 @@ Prototype d'un FPS spacial issue du Template "FPS microgame" de Unity que j'ai P
 -Jouabilité : Clavier/mannette
 
 
--Installation: télécharger le dossier https://drive.google.com/drive/folders/1MGGP4UEu_VsoGbKR2y3o28T0dcL44jfF?usp=sharing
+-Installation: télécharger le dossier https://drive.google.com/file/d/14RGvxjJmgK_LAq_CW36cBA_NbIgfQuel/view?usp=sharing
 
 ou
 
