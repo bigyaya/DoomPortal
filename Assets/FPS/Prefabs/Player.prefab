@@ -426,7 +426,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9b849ae2755b428b23edfa9686c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeGrapple: 0
+  freeze: 0
   PlayerCamera: {fileID: 8303093099919959869}
+  wallrunning: 0
   AudioSource: {fileID: 1272397862697293493}
   GravityDownForce: 20
   GroundCheckLayers:
@@ -586,7 +589,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243893235630832048, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f404f8d3c2a4b4f48989fb1120e78fb8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
